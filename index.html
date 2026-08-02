@@ -9,31 +9,32 @@
     <!-- Google Fonts - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light gray background */
-            color: #334155; /* Slate-700 for default text */
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            color: #334155;
         }
-        /* Custom scrollbar for aesthetics */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #e2e8f0; /* Gray-200 */
+            background: #e2e8f0;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #6366f1; /* Indigo-500 */
+            background: #6366f1;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #4f46e5; /* Indigo-600 */
+            background: #4f46e5;
         }
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Blob animations (existing) */
         @keyframes blob {
             0% {
                 transform: translate(0, 0) scale(1);
@@ -57,8 +58,6 @@
         .animation-delay-4000 {
             animation-delay: 4s;
         }
-
-        /* Fade-in-up animation (existing) */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -75,118 +74,142 @@
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
-
-        /* New styles for background image slideshow */
         .hero-background-slideshow {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             overflow: hidden;
-            z-index: -1; /* Ensure it's behind content */
+            z-index: -1;
         }
         .hero-background-slideshow img {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover the entire area */
-            opacity: 0; /* Hidden by default */
-            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1.05);
         }
         .hero-background-slideshow img.active {
-            opacity: 1; /* Active image is visible */
+            opacity: 1;
+        }
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        header nav a,
+        header nav button,
+        #mobile-menu nav a,
+        #mobile-menu nav button {
+            font-size: 1.05rem;
         }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Header & Navigation -->
-    <header class="bg-white shadow-md py-4 px-6 md:px-12 sticky top-0 z-50">
+    <header class="bg-white/90 backdrop-blur-md shadow-sm py-4 px-6 md:px-12 sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="#hero" class="text-2xl font-extrabold text-indigo-700 rounded-md p-2 hover:bg-indigo-50 transition duration-300">Tilen Kungu</a>
-            <nav class="hidden md:flex space-x-8">
+            <nav class="hidden md:flex items-center space-x-2">
                 <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">About</a>
                 <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Skills</a>
+                <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Services</a>
                 <a href="#portfolio" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Portfolio</a>
+                <a id="loginNavLink" href="login_register.html" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Login</a>
+                <button id="logoutButton" class="hidden text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Logout</button>
                 <a href="#contact" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-full hover:bg-indigo-700 transition duration-300 shadow-md">Contact</a>
             </nav>
-            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
         </div>
-        <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 transition-all duration-300 ease-in-out">
-            <nav class="flex flex-col items-center space-y-4">
+            <nav class="flex flex-col items-center space-y-2">
                 <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">About</a>
                 <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Skills</a>
+                <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Services</a>
                 <a href="#portfolio" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Portfolio</a>
+                <a id="mobileLoginNavLink" href="login_register.html" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Login</a>
+                <button id="mobileLogoutButton" class="hidden text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Logout</button>
                 <a href="#contact" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-full hover:bg-indigo-700 transition duration-300 w-max">Contact</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="relative bg-gradient-to-r from-indigo-600 to-blue-500 text-white min-h-screen flex items-center justify-center py-16 px-6 md:px-12 overflow-hidden">
-        <!-- Background Image Slideshow Container -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden text-white">
         <div class="hero-background-slideshow">
-            <!-- Placeholder images - REPLACE THESE WITH YOUR ACTUAL IMAGES -->
-            <img src="https://placehold.co/1920x1080/4a5568/ffffff?text=Background+1" alt="Background Image 1" class="active">
-            <img src="https://placehold.co/1920x1080/2d3748/ffffff?text=Background+2" alt="Background Image 2">
-            <img src="https://placehold.co/1920x1080/1a202c/ffffff?text=Background+3" alt="Background Image 3">
+            <img src="web.jpeg" alt="Web development project" class="active">
+            <img src="netwoking.jpeg" alt="Networking setup">
+            <img src="app dev.jpeg" alt="Application development work">
+            <img src="hardware 1.jpeg" alt="Hardware support work">
         </div>
-
+        <div class="absolute inset-0 bg-slate-950/70"></div>
         <div class="absolute inset-0 z-0">
-            <!-- Original Blob Background pattern/shapes for visual interest -->
             <div class="absolute top-0 left-0 w-64 h-64 bg-indigo-500 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
             <div class="absolute top-0 right-0 w-72 h-72 bg-blue-400 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
             <div class="absolute bottom-0 left-1/4 w-80 h-80 bg-purple-500 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
         </div>
-        <div class="relative z-10 text-center max-w-4xl mx-auto">
-            <img src="my image.jpg" alt="Tilen Kungu Photo" class="w-36 h-36 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg transform transition-transform hover:scale-105">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
-                Hi, I'm <span class="text-yellow-300">Tilen Kungu</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 font-light animate-fade-in-up delay-200">
-                An IT Student & Professional specializing in <span class="font-semibold">Networking, Web Development, CCTV Installation, Application Development, Graphics Design, Video Editing, and Hardware Repair & Maintenance.</span>
-            </p>
-            <p class="text-lg md:text-xl mb-8 font-light animate-fade-in-up delay-300">
-                Offering comprehensive <span class="font-semibold">tech solutions</span> for your business and personal needs.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-400">
-                <a href="#portfolio" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:-translate-y-1">
-                    View My Work
-                </a>
-                <a href="#contact" class="border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-indigo-700 transition duration-300 transform hover:-translate-y-1">
-                    Let's Connect
-                </a>
+        <div class="relative z-10 container mx-auto max-w-6xl">
+            <div class="max-w-4xl mx-auto md:mx-0 text-center md:text-left">
+                <span class="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium backdrop-blur animate-fade-in-up">Available for projects, support, and consultations</span>
+                <img src="TIKTECH.jpeg" alt="Tilen Kungu Photo" class="w-32 h-32 rounded-full mx-auto md:mx-0 mb-6 mt-6 object-cover border-4 border-white shadow-lg transform transition-transform hover:scale-105">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up delay-200">
+                    I build reliable <span class="text-yellow-300">tech solutions</span> that work.
+                </h1>
+                <p class="text-lg md:text-2xl mb-6 font-light animate-fade-in-up delay-300">
+                    I’m Tilen Kungu, an IT expert and professional focused on networking, web development, CCTV systems, application development, graphics, video editing, and hardware repairs.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 animate-fade-in-up delay-400">
+                    <a href="#portfolio" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:-translate-y-1">
+                        See my work
+                    </a>
+                    <a href="#contact" class="border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-indigo-700 transition duration-300 transform hover:-translate-y-1">
+                        Let’s connect
+                    </a>
+                </div>
+                <div class="mt-10 grid gap-4 sm:grid-cols-3 animate-fade-in-up delay-400">
+                    <div class="glass-card rounded-2xl p-4 text-left">
+                        <p class="text-2xl font-bold">10+</p>
+                        <p class="text-sm text-slate-100">service areas covered</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 text-left">
+                        <p class="text-2xl font-bold">100%</p>
+                        <p class="text-sm text-slate-100">focus on practical results</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 text-left">
+                        <p class="text-2xl font-bold">24/7</p>
+                        <p class="text-sm text-slate-100">support mindset</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Me Section -->
     <section id="about" class="py-16 px-6 md:px-12 bg-white">
-        <div class="container mx-auto max-w-5xl text-center">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-8">About Me</h2>
-            <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                As a passionate IT student, I thrive on solving complex problems and building innovative solutions. My journey in technology has equipped me with a diverse skill set, allowing me to bridge the gap between theoretical knowledge and practical application. I am constantly exploring new technologies and methodologies to deliver high-quality, efficient, and scalable results.
-            </p>
-            <p class="text-lg leading-relaxed text-gray-700">
-                My dedication goes beyond just coding; I am committed to understanding the underlying infrastructure through networking, ensuring robust security with CCTV systems, crafting intuitive user experiences in application development, bringing creative visions to life through graphics design and video editing, and ensuring optimal system performance through **hardware repair and maintenance**. I believe in continuous learning and leveraging technology to make a tangible positive impact, offering comprehensive **tech solutions** to meet diverse needs.
-            </p>
-            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-indigo-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">My Philosophy</h3>
-                    <p class="text-gray-700">"Innovation through collaboration, excellence through continuous learning."</p>
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-indigo-700 mb-6">About Me</h2>
+                    <p class="text-lg leading-relaxed mb-5 text-gray-700">
+                        I’m a passionate IT student and professional who enjoys turning complex requirements into practical, reliable solutions. My work blends technical skill with creativity, so I can support both business goals and user experience.
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        From building responsive websites and connecting networks to setting up CCTV systems and repairing hardware, I focus on dependable results and clear communication. Every project is approached with attention to detail and a strong commitment to learning.
+                    </p>
                 </div>
-                <div class="bg-indigo-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">What Drives Me</h3>
-                    <p class="text-gray-700">The challenge of transforming ideas into functional and impactful technological solutions.</p>
+                <div class="rounded-3xl bg-gradient-to-br from-indigo-600 to-blue-600 p-8 text-white shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4">What I bring to every project</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li>• Clear planning and dependable execution</li>
+                        <li>• Strong problem solving across software and hardware</li>
+                        <li>• Clean, modern presentation with practical functionality</li>
+                        <li>• Friendly support from first idea to final delivery</li>
+                    </ul>
+                    <a href="#contact" class="inline-block mt-6 rounded-full bg-white px-5 py-3 font-semibold text-indigo-700 transition hover:bg-slate-100">Let’s discuss your idea</a>
                 </div>
             </div>
         </div>
@@ -290,6 +313,31 @@
                         <li>Preventive Maintenance</li>
                         <li>Troubleshooting Hardware Issues</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-16 px-6 md:px-12 bg-slate-50">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h2 class="text-4xl font-bold text-indigo-700 mb-4">Services I Offer</h2>
+            <p class="text-lg text-gray-700 mb-10">Practical solutions for homes, businesses, and growing digital needs.</p>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Web Development</h3>
+                    <p class="text-gray-700">Modern, responsive websites and web apps built to look great and perform well.</p>
+                </div>
+                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Networking & Security</h3>
+                    <p class="text-gray-700">Reliable network setup, support, and simple security improvements for everyday use.</p>
+                </div>
+                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">CCTV Systems</h3>
+                    <p class="text-gray-700">Camera planning, installation, configuration, and monitoring support.</p>
+                </div>
+                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Hardware Support</h3>
+                    <p class="text-gray-700">PC repairs, upgrades, maintenance, and troubleshooting for smooth performance.</p>
                 </div>
             </div>
         </div>
@@ -448,7 +496,9 @@
             <p class="text-lg leading-relaxed mb-10 text-gray-700">
                 Have a project in mind or just want to chat? Feel free to reach out!
             </p>
-            <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST" class="space-y-6 bg-gray-50 p-8 rounded-lg shadow-lg">
+            <div id="authMessage" class="text-sm text-gray-700 mb-4"></div>
+            <div id="formMessage" class="hidden rounded-md border px-4 py-3 text-sm text-center"></div>
+            <form id="contactForm" class="space-y-6 bg-gray-50 p-8 rounded-lg shadow-lg">
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 text-left">Your Name</label>
                     <input type="text" id="name" name="name" required
@@ -474,6 +524,16 @@
                     Send Message
                 </button>
             </form>
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600 mb-3">Prefer WhatsApp? Send me a message directly with one click.</p>
+                <a href="https://wa.me/254794347403?text=Hello%20Tilen%2C%20I%20would%20like%20to%20chat%20about%20your%20IT%20services.%20Please%20let%20me%20know%20how%20to%20get%20started." target="_blank" rel="noopener"
+                    class="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-5 rounded-full shadow-md transition duration-300">
+                    <span>Chat on WhatsApp</span>
+                </a>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+                Messages are stored securely in PostgreSQL.
+            </p>
         </div>
     </section>
 
@@ -481,29 +541,29 @@
     <footer class="bg-gray-800 text-white py-8 px-6 md:px-12 rounded-t-lg">
         <div class="container mx-auto text-center">
             <p class="mb-4">&copy; 2025 Tilen Kungu. All rights reserved.</p>
-            <div class="flex justify-center space-x-6">
+            <div class="flex justify-center flex-wrap gap-4">
                 <!-- Facebook -->
-                <a href="#" class="text-gray-300 hover:text-white transition duration-300">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                <a href="https://www.facebook.com/tilenvennykungu" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: #1877F2;" aria-label="Facebook">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#fff" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z" />
                     </svg>
                 </a>
                 <!-- Instagram -->
-                <a href="#" class="text-gray-300 hover:text-white transition duration-300">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M12.001 2.001c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm5.297 5.86c-.198.813-.86 1.475-1.673 1.673-.813.198-1.626.198-2.439 0-.813-.198-1.475-.86-1.673-1.673-.198-.813-.198-1.626 0-2.439.198-.813.86-1.475 1.673-1.673.813-.198 1.626-.198 2.439 0 .813.198 1.475.86 1.673 1.673.198.813.198 1.626 0 2.439zM12 14.5c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5z" />
+                <a href="https://www.instagram.com/tilenvennykungu" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 30%, #d6249f 60%, #285AEB 100%);" aria-label="Instagram">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#fff" d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
                     </svg>
                 </a>
                 <!-- TikTok -->
-                <a href="#" class="text-gray-300 hover:text-white transition duration-300">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.5 16.5c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5h2c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5h-2zm4.5 0c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5h2c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5h-2zM12 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 8.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+                <a href="https://www.tiktok.com/@tilenvennykungu" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: #000;" aria-label="TikTok">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#fff" d="M12.5 2.5h2.5v7.5c1.103 0 2 .897 2 2s-.897 2-2 2c-.66 0-1.243-.336-1.588-.838a2.99 2.99 0 00-2.164-.662V22a7 7 0 017-7V3.5h2.5v6.5c0 4.142-3.358 7.5-7.5 7.5S5.5 14.142 5.5 10 8.858 2.5 13 2.5V2.5z" />
                     </svg>
                 </a>
                 <!-- WhatsApp -->
-                <a href="#" class="text-gray-300 hover:text-white transition duration-300">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12.001 2.001c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm4.75 13.5c-.198.813-.86 1.475-1.673 1.673-.813.198-1.626.198-2.439 0-.813-.198-1.475-.86-1.673-1.673-.198-.813-.198-1.626 0-2.439.198-.813.86-1.475 1.673-1.673.813-.198 1.626-.198 2.439 0 .813.198 1.475.86 1.673 1.673.198.813.198 1.626 0 2.439zM12 14.5c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5z" />
+                <a href="https://wa.me/44794347403" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: #25D366;" aria-label="WhatsApp">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#fff" d="M16.11 14.89c-.19.53-1.1 1.01-1.58 1.06-.46.05-.97.07-1.8-.26-1.96-.44-3.22-1.73-3.66-3.03-.32-.9-.03-1.32.82-2.22.25-.28.53-.43.86-.43.29 0 .53.04.76.12.29.09.48.15.72.15.31 0 .5-.04.76-.04.24 0 .5-.04.77-.12.34-.11.74-.31 1.08-.49.25-.13.47-.23.71-.23.26 0 .51.1.77.3.47.33.8.94.88 1.27.08.33.08.78 0 1.13-.09.35-.36.62-.63.91-.19.2-.36.38-.55.57-.06.05-.21.18-.29.25-.09.08-.19.19-.06.38.13.19.57.99.61 1.08.04.09.61.93 1.58 1.55.22.14.39.23.57.23.21 0 .55-.08.84-.2.29-.12.74-.35.84-.7.11-.37.11-.81.08-.88-.03-.08-.11-.12-.23-.18z" />
                     </svg>
                 </a>
             </div>
@@ -537,12 +597,148 @@
             });
         });
 
-        // Placeholder for form submission (replace with actual backend endpoint)
-        document.querySelector('#contact form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Form submitted! (This is a placeholder. Implement your backend for actual submission.)');
-            this.reset(); // Clear the form
-        });
+        const apiBase = 'http://localhost:3000';
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                formMessage.className = 'rounded-md border px-4 py-3 text-sm hidden';
+                formMessage.textContent = '';
+
+                const sessionId = localStorage.getItem('mywebpageSessionId');
+                if (!sessionId) {
+                    formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+                    formMessage.textContent = 'You must be logged in to send a message. Please login first.';
+                    return;
+                }
+
+                const formData = {
+                    name: contactForm.name.value.trim(),
+                    email: contactForm.email.value.trim(),
+                    subject: contactForm.subject.value.trim(),
+                    message: contactForm.message.value.trim(),
+                };
+
+                if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+                    formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+                    formMessage.textContent = 'Please complete all fields before submitting.';
+                    return;
+                }
+
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+                }
+
+                try {
+                    const response = await fetch(`${apiBase}/api/contact`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-session-id': sessionId,
+                        },
+                        body: JSON.stringify(formData),
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        formMessage.className = 'rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700';
+                        formMessage.textContent = result.message;
+                        contactForm.reset();
+                    } else {
+                        formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+                        formMessage.textContent = result.message || 'Unable to send your message. Please try again later.';
+                    }
+                } catch (error) {
+                    formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+                    formMessage.textContent = 'Unable to send your message right now. Please try again later.';
+                } finally {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Send Message';
+                    }
+                }
+            });
+        }
+
+        // --- Auth helpers ---
+        const sessionKey = 'mywebpageSessionId';
+        const loginNavLink = document.getElementById('loginNavLink');
+        const logoutButton = document.getElementById('logoutButton');
+        const mobileLoginNavLink = document.getElementById('mobileLoginNavLink');
+        const mobileLogoutButton = document.getElementById('mobileLogoutButton');
+        const authMessage = document.getElementById('authMessage');
+
+        function getSessionId() {
+            return localStorage.getItem(sessionKey);
+        }
+
+        function setSessionId(id) {
+            if (id) {
+                localStorage.setItem(sessionKey, id);
+            } else {
+                localStorage.removeItem(sessionKey);
+            }
+        }
+
+        async function checkAuth() {
+            const sessionId = getSessionId();
+            if (!sessionId) {
+                updateAuthUI(false);
+                return false;
+            }
+
+            try {
+                const response = await fetch(`${apiBase}/api/session?sessionId=${sessionId}`);
+                const data = await response.json();
+                updateAuthUI(data.authenticated);
+                return data.authenticated;
+            } catch (error) {
+                updateAuthUI(false);
+                return false;
+            }
+        }
+
+        function updateAuthUI(isAuthenticated) {
+            if (loginNavLink) loginNavLink.classList.toggle('hidden', isAuthenticated);
+            if (logoutButton) logoutButton.classList.toggle('hidden', !isAuthenticated);
+            if (mobileLoginNavLink) mobileLoginNavLink.classList.toggle('hidden', isAuthenticated);
+            if (mobileLogoutButton) mobileLogoutButton.classList.toggle('hidden', !isAuthenticated);
+
+            if (authMessage) {
+                authMessage.textContent = isAuthenticated
+                    ? 'You are logged in. You can send a message below.'
+                    : 'Please log in to send a message.';
+                authMessage.className = isAuthenticated ? 'text-sm text-green-700 mb-4' : 'text-sm text-red-700 mb-4';
+            }
+        }
+
+        async function logout() {
+            const sessionId = getSessionId();
+            if (sessionId) {
+                await fetch(`${apiBase}/api/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'x-session-id': sessionId,
+                    },
+                });
+            }
+            setSessionId(null);
+            updateAuthUI(false);
+            window.location.href = 'login_register.html';
+        }
+
+        if (logoutButton) {
+            logoutButton.addEventListener('click', logout);
+        }
+        if (mobileLogoutButton) {
+            mobileLogoutButton.addEventListener('click', logout);
+        }
+
+        checkAuth();
 
         // --- Background Image Slideshow Logic ---
         const backgroundImages = document.querySelectorAll('.hero-background-slideshow img');
