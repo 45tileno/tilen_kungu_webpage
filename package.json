@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "db:migrate": "node -e \"require('./db').runMigrations().then(() => process.exit(0)).catch(error => { console.error(error); process.exit(1); })\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

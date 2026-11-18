@@ -24,10 +24,14 @@
 
 ## Next phase — backend hardening
 
-- [ ] Make session storage serverless-safe and durable across Vercel instances.
-- [ ] Add explicit PostgreSQL migrations for `users` and `contacts`.
+- [x] Make session storage serverless-safe and durable across Vercel instances using hashed bearer tokens in PostgreSQL, SQL expiry checks, logout deletion, and a configurable seven-day default lifetime.
+- [x] Add an advisory-lock migration runner and explicit PostgreSQL migration for `users`, `contacts`, `sessions`, indexes, and contact ownership.
+- [x] Gate API requests on migration readiness and expose database connectivity in `/api/health`.
+- [x] Add `npm run db:migrate` and document `DATABASE_URL`, pool, TLS, and session settings in `.env.example`.
 - [ ] Add request validation, normalization, and useful error responses.
 - [ ] Add rate limiting and abuse protection to auth/contact endpoints.
 - [ ] Confirm SMTP configuration, sender identity, and delivery failure handling.
 - [ ] Audit production secrets, CORS policy, security headers, and logging.
 - [ ] Add API/integration tests for registration, login, logout, session, and contact flow.
+
+The migration command was syntax-checked but could not execute in this sandbox because no local PostgreSQL server is available. It must be run against the configured production/staging `DATABASE_URL` before relying on the hardened endpoints.

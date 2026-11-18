@@ -1,8 +1,3 @@
-CREATE TABLE IF NOT EXISTS contacts (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  subject TEXT NOT NULL,
-  message TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+-- Legacy reference only. Do not apply this file directly.
+-- The canonical schema is managed by migrations/001_initial_schema.sql.
+-- Apply all pending migrations with: npm run db:migrate
