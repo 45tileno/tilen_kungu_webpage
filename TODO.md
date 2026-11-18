@@ -3,7 +3,7 @@
 ## UI pass — approved Signal & Craft direction
 
 - [x] Replace the Tailwind CDN homepage with semantic editorial layout.
-- [x] Establish shared navy, indigo, yellow, slate, typography, spacing, focus, and motion tokens in `styles.css`.
+- [x] Establish shared forest-green, deep-green, yellow, slate, typography, spacing, focus, and motion tokens in `styles.css`.
 - [x] Add responsive sticky navigation, active section state, mobile menu, and skip link.
 - [x] Clarify the hero hierarchy with outcome-led copy, two CTAs, proof metrics, and image rail.
 - [x] Preserve and reorganize the existing capabilities, services, portfolio subjects, testimonials, WhatsApp CTA, contact form, and authentication entry point.

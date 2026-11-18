@@ -16,7 +16,7 @@ Upgrade the existing portfolio and IT-services website from a large Tailwind CDN
 
 ## Design Options
 
-1. **Signal & Craft — 0.62 probability (chosen):** editorial IT studio aesthetic with deep navy, electric indigo, warm yellow accent, strong typography, technical labels, and asymmetrical section composition.
+1. **Signal & Craft — 0.62 probability (chosen):** editorial IT studio aesthetic with dark forest green, deep leaf green, warm yellow accent, strong typography, technical labels, and asymmetrical section composition.
 2. **Soft Systems — 0.21 probability:** calm light interface with cool blue surfaces, rounded cards, and friendly service-first messaging.
 3. **Field Engineer — 0.17 probability:** darker operational aesthetic with lime status accents, utility panels, and a more technical dashboard feel.
 
@@ -35,7 +35,7 @@ Modern editorial technology portfolio: confident typography, deliberate whitespa
 
 ### Color Philosophy
 
-Deep navy communicates reliability and technical depth. Electric indigo provides the primary brand signal. Warm yellow is reserved for emphasis and action, making important words and CTAs easy to spot. Soft slate surfaces keep long-form content readable.
+Dark forest green communicates reliability, stability, and technical depth. Deep leaf green provides the primary brand signal. Warm yellow is reserved for emphasis and action, making important words and CTAs easy to spot. Soft slate surfaces keep long-form content readable.
 
 ### Layout Paradigm
 
@@ -76,7 +76,7 @@ Keep the Tilen Kungu wordmark as text for now, but add a small signal-bar mark t
 
 ### Signature Brand Color
 
-Electric indigo `#635BFF`, paired with warm signal yellow `#F4C84A`.
+Deep leaf green `#1F6B52`, paired with warm signal yellow `#F4C84A`.
 
 ## Implementation Plan
 
