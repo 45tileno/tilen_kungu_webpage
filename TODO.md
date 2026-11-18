@@ -16,6 +16,8 @@
 - [x] Add `sitemap.xml` for the public homepage and `robots.txt` exclusions for APIs and authentication.
 - [x] Mark the authentication page `noindex, nofollow`.
 - [x] Create the reusable `portfolio-refresh-seo` skill for resume-backed portfolio refreshes and SEO validation.
+- [x] Add a Q&A navigation tab and deterministic assistant with resume-grounded answers about Tilen, services, this website, and LottoOps.
+- [x] Add a direct `https://lottoops.com/` link to the LottoOps portfolio case study.
 
 ## Acceptance criteria
 

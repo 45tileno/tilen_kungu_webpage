@@ -87,3 +87,60 @@ contactForm?.addEventListener('submit', async event => {
   finally { submitButton.disabled = false; submitButton.innerHTML = 'Send message <span aria-hidden="true">↗</span>'; }
 });
 checkAuth();
+
+const chatPanel = document.querySelector('[data-chat-panel]');
+const chatMessages = document.querySelector('[data-chat-messages]');
+const chatForm = document.querySelector('[data-chat-form]');
+const chatInput = document.querySelector('#chatInput');
+const chatOpeners = document.querySelectorAll('[data-open-chat]');
+const chatCloser = document.querySelector('[data-close-chat]');
+const qaPrompts = document.querySelectorAll('[data-question]');
+
+const qaAnswers = [
+  { keys: ['who is tilen', 'what does tilen do', 'about tilen', 'experience'], answer: 'Tilen Kungu is an IT Specialist and Software Developer based in Nairobi, Kenya. His experience spans technical support, full-stack development, system testing, network administration, database management, hardware support, and infrastructure.' },
+  { keys: ['lottoops', 'inventory platform', 'inventory system'], answer: 'LottoOps is a secure inventory management platform Tilen architected and deployed. It includes real-time logging, duplicate checking, role-based access control, scanner-ready data entry, and dynamic stock status tracking, using React/Next.js with Firestore and PostgreSQL.' },
+  { keys: ['services', 'offer', 'help with', 'do you provide'], answer: 'The website covers web development, practical web apps, networks and security, CCTV systems, applications, creative work, hardware support, and testing and operations.' },
+  { keys: ['website', 'this site', 'portfolio'], answer: 'This is Tilen Kungu’s portfolio and IT-services website. You can explore his capabilities, selected work, services, testimonials, and contact options.' },
+  { keys: ['contact', 'reach', 'hire', 'start a project', 'whatsapp'], answer: 'Use the contact form on this page or the WhatsApp button for a quick conversation. You can also log in first if you want to submit the protected contact form.' },
+  { keys: ['location', 'where', 'nairobi', 'kenya'], answer: 'Tilen is based in Nairobi, Kenya, and can support local and remote technology projects.' },
+  { keys: ['technology', 'stack', 'skills', 'tools'], answer: 'Resume-backed experience includes React, Next.js, Firestore, PostgreSQL, Firebase, database management, network administration, system testing, API integration, debugging, and hardware support.' },
+];
+
+function answerQuestion(question) {
+  const normalized = question.toLowerCase().trim();
+  const match = qaAnswers.find(item => item.keys.some(key => normalized.includes(key)));
+  return match?.answer || 'I can answer questions about Tilen, his resume-backed experience, services, this website, and LottoOps. For a specific project quote or technical detail not listed here, please use the contact form or WhatsApp.';
+}
+function appendChatMessage(text, role) {
+  if (!chatMessages) return;
+  const message = document.createElement('div');
+  message.className = `chat-message ${role}`;
+  message.textContent = text;
+  chatMessages.appendChild(message);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+function openChat(question) {
+  if (!chatPanel) return;
+  chatPanel.classList.remove('is-hidden');
+  document.querySelector('.chat-launcher')?.setAttribute('aria-expanded', 'true');
+  if (question) {
+    appendChatMessage(question, 'user');
+    window.setTimeout(() => appendChatMessage(answerQuestion(question), 'assistant'), 120);
+  }
+  window.setTimeout(() => chatInput?.focus(), 0);
+}
+function closeChat() {
+  chatPanel?.classList.add('is-hidden');
+  document.querySelector('.chat-launcher')?.setAttribute('aria-expanded', 'false');
+}
+chatOpeners.forEach(button => button.addEventListener('click', () => openChat()));
+chatCloser?.addEventListener('click', closeChat);
+qaPrompts.forEach(button => button.addEventListener('click', () => openChat(button.dataset.question)));
+chatForm?.addEventListener('submit', event => {
+  event.preventDefault();
+  const question = chatInput.value.trim();
+  if (!question) return;
+  appendChatMessage(question, 'user');
+  chatInput.value = '';
+  window.setTimeout(() => appendChatMessage(answerQuestion(question), 'assistant'), 120);
+});
