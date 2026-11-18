@@ -11,6 +11,7 @@
 - [x] Restyle `login_register.html` with the shared visual language and accessible form labels/status messages.
 - [x] Add reduced-motion handling, visible focus states, and responsive layouts.
 - [x] Add `public/manus-routes.json` for the managed preview workflow.
+- [x] Add resume-backed positioning, the Testing & Operations capability, and the LottoOps inventory-platform case study using only details supplied in the uploaded resume.
 
 ## Acceptance criteria
 
