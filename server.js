@@ -238,6 +238,12 @@ app.get('/api/health', (_req, res) => {
   res.json({ success: true, status: 'OK' });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// Export the app for Vercel's serverless Node runtime.
+module.exports = app;
+
+// Keep local development working without starting a listener during Vercel imports.
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
