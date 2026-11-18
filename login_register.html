@@ -1,166 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login & Register</title>
-<style>
-    * { box-sizing: border-box; }
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(135deg, #eef2ff, #f8fafc);
-        color: #1f2937;
-    }
-    .card {
-        width: min(92vw, 420px);
-        background: white;
-        padding: 28px;
-        border-radius: 18px;
-        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-    }
-    h2 { margin-top: 0; color: #4338ca; }
-    p { color: #64748b; margin-bottom: 16px; }
-    input {
-        width: 100%;
-        padding: 12px 14px;
-        margin: 8px 0 12px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        outline: none;
-    }
-    input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
-    button {
-        width: 100%;
-        padding: 12px;
-        background: linear-gradient(90deg, #4f46e5, #6366f1);
-        color: white;
-        border: none;
-        border-radius: 999px;
-        font-weight: 700;
-        cursor: pointer;
-    }
-    .toggle {
-        text-align: center;
-        margin-top: 14px;
-        cursor: pointer;
-        color: #4338ca;
-        font-weight: 600;
-    }
-    .small { font-size: 0.9rem; color: #64748b; text-align: center; margin-top: 8px; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>Login or Register — Tilen Kungu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body.auth-page{min-height:100vh;background:var(--navy);display:grid;place-items:center;padding:24px;overflow-x:hidden}.auth-page:before{content:"";position:fixed;inset:-20%;background:radial-gradient(circle at 10% 20%,rgba(99,91,255,.28),transparent 28%),radial-gradient(circle at 90% 80%,rgba(244,200,74,.15),transparent 25%);pointer-events:none}.auth-shell{position:relative;width:min(100%,1040px);display:grid;grid-template-columns:1fr 1fr;min-height:600px;background:var(--paper);box-shadow:0 30px 90px rgba(0,0,0,.35)}.auth-intro{display:flex;flex-direction:column;justify-content:space-between;padding:42px;background:linear-gradient(145deg,#131d39,#0b1020);color:#fff}.auth-intro h1{max-width:420px;margin-top:90px;font-size:clamp(2.3rem,5vw,4.7rem)}.auth-intro p{max-width:370px;color:#b8c1d2}.auth-back{color:#e8edf6;font-size:.85rem;font-weight:700}.auth-back:hover{color:var(--yellow)}.auth-points{display:grid;gap:11px;color:#d7ddeb;font-size:.85rem}.auth-points span{color:var(--yellow);margin-right:8px}.auth-form-panel{padding:42px;display:flex;align-items:center}.auth-form-wrap{width:100%;max-width:410px;margin:auto}.auth-form-wrap h2{font-size:2.1rem}.auth-form-wrap>p{color:var(--muted)}.auth-form{display:grid;gap:15px;margin-top:28px}.auth-form label{display:grid;gap:7px;font-size:.8rem;font-weight:800}.auth-form button{margin-top:6px}.auth-switch{margin:24px 0 0;color:var(--muted);font-size:.85rem;text-align:center}.auth-switch button{width:auto;margin:0;padding:0;border:0;background:none;color:var(--indigo);font-weight:800}.auth-message{min-height:22px;margin-top:14px;text-align:center;font-size:.82rem}.auth-message.error{color:#a32929}.auth-message.success{color:#1f7a3e}@media(max-width:720px){.auth-shell{grid-template-columns:1fr;min-height:auto}.auth-intro{min-height:280px;padding:28px}.auth-intro h1{margin-top:45px;font-size:2.55rem}.auth-points{display:none}.auth-form-panel{padding:30px 24px}}
+  </style>
 </head>
-<body>
-<div class="card">
-    <div id="loginForm">
-        <h2>Welcome back</h2>
-        <p>Sign in to access your account.</p>
-        <form id="loginFormElement">
-            <input type="text" id="loginUsername" placeholder="Username or Email" required>
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <div id="loginMessage" class="small"></div>
-        <div class="toggle" onclick="showRegister()">Don’t have an account? Register</div>
-    </div>
-
-    <div id="registerForm" style="display:none;">
-        <h2>Create account</h2>
-        <p>Join and start managing your projects with ease.</p>
-        <form id="registerFormElement">
-            <input type="text" id="registerUsername" placeholder="Username" required>
-            <input type="email" id="registerEmail" placeholder="Email" required>
-            <input type="password" id="registerPassword" placeholder="Password" required>
-            <button type="submit">Register</button>
-        </form>
-        <div id="registerMessage" class="small"></div>
-        <div class="toggle" onclick="showLogin()">Already have an account? Login</div>
-    </div>
-    <p class="small">Your login/register now uses the Node backend.</p>
-</div>
-
-<script>
-function showRegister() {
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("registerForm").style.display = "block";
-}
-function showLogin() {
-    document.getElementById("registerForm").style.display = "none";
-    document.getElementById("loginForm").style.display = "block";
-}
-
-const apiBase = 'http://localhost:3000';
-
-document.getElementById('registerFormElement').addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const username = document.getElementById('registerUsername').value.trim();
-    const email = document.getElementById('registerEmail').value.trim();
-    const password = document.getElementById('registerPassword').value;
-    const registerMessage = document.getElementById('registerMessage');
-
-    registerMessage.textContent = '';
-
-    const response = await fetch(`${apiBase}/api/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-    });
-
-    let result;
-    try {
-        result = await response.json();
-    } catch {
-        registerMessage.textContent = 'Server error: unable to register right now.';
-        registerMessage.style.color = '#dc2626';
-        return;
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-intro"><a class="auth-back" href="index.html">← Back to Tilen Kungu</a><div><p class="eyebrow light">Access / Contact</p><h1>Keep the next step moving.</h1><p>Log in to send a project message through the secure contact flow.</p></div><div class="auth-points"><div><span>01</span> Practical support</div><div><span>02</span> Clear communication</div><div><span>03</span> Reliable delivery</div></div></section>
+    <section class="auth-form-panel"><div class="auth-form-wrap">
+      <div id="loginForm"><p class="eyebrow">Welcome back</p><h2>Sign in</h2><p>Access your account to send a message.</p><form class="auth-form" id="loginFormElement"><label for="loginUsername">Username or email<input type="text" id="loginUsername" autocomplete="username" required></label><label for="loginPassword">Password<input type="password" id="loginPassword" autocomplete="current-password" required></label><button class="button button-dark" type="submit">Login <span aria-hidden="true">↗</span></button></form><div id="loginMessage" class="auth-message" role="status"></div><p class="auth-switch">New here? <button type="button" id="showRegister">Create an account</button></p></div>
+      <div id="registerForm" class="is-hidden"><p class="eyebrow">Get started</p><h2>Create account</h2><p>Join to manage your contact messages.</p><form class="auth-form" id="registerFormElement"><label for="registerUsername">Username<input type="text" id="registerUsername" autocomplete="username" required></label><label for="registerEmail">Email address<input type="email" id="registerEmail" autocomplete="email" required></label><label for="registerPassword">Password<input type="password" id="registerPassword" autocomplete="new-password" minlength="8" required></label><button class="button button-dark" type="submit">Register <span aria-hidden="true">↗</span></button></form><div id="registerMessage" class="auth-message" role="status"></div><p class="auth-switch">Already have an account? <button type="button" id="showLogin">Sign in</button></p></div>
+    </div></section>
+  </main>
+  <script>
+    const apiBase = '';
+    const sessionKey = 'mywebpageSessionId';
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const showRegister = () => { loginForm.classList.add('is-hidden'); registerForm.classList.remove('is-hidden'); };
+    const showLogin = () => { registerForm.classList.add('is-hidden'); loginForm.classList.remove('is-hidden'); };
+    document.getElementById('showRegister').addEventListener('click', showRegister);
+    document.getElementById('showLogin').addEventListener('click', showLogin);
+    async function submitAuth(form, endpoint, messageId, payload, onSuccess) {
+      const message = document.getElementById(messageId); const button = form.querySelector('button[type="submit"]');
+      message.className = 'auth-message'; message.textContent = ''; button.disabled = true; button.dataset.label = button.textContent; button.textContent = 'Working…';
+      try { const response = await fetch(`${apiBase}/api/${endpoint}`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); const result = await response.json(); if (!response.ok || !result.success) throw new Error(result.message || 'Something went wrong.'); message.textContent = result.message || 'Success.'; message.classList.add('success'); onSuccess?.(result); } catch(error) { message.textContent = error.message || 'Unable to complete that request.'; message.classList.add('error'); } finally { button.disabled = false; button.textContent = button.dataset.label; }
     }
-
-    registerMessage.textContent = result.message;
-    registerMessage.style.color = result.success ? '#16a34a' : '#dc2626';
-
-    if (result.success) {
-        document.getElementById('registerFormElement').reset();
-        showLogin();
-    }
-});
-
-document.getElementById('loginFormElement').addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    const loginMessage = document.getElementById('loginMessage');
-
-    loginMessage.textContent = '';
-
-    const response = await fetch(`${apiBase}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-    });
-
-    let result;
-    try {
-        result = await response.json();
-    } catch {
-        loginMessage.textContent = 'Server error: unable to log in right now.';
-        loginMessage.style.color = '#dc2626';
-        return;
-    }
-
-    loginMessage.textContent = result.message;
-    loginMessage.style.color = result.success ? '#16a34a' : '#dc2626';
-
-    if (result.success) {
-        localStorage.setItem('mywebpageSessionId', result.sessionId);
-        document.getElementById('loginFormElement').reset();
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 800);
-    }
-});
-</script>
+    document.getElementById('registerFormElement').addEventListener('submit', event => { event.preventDefault(); const form = event.currentTarget; submitAuth(form,'register','registerMessage',{username:form.registerUsername.value.trim(),email:form.registerEmail.value.trim(),password:form.registerPassword.value}, result => { form.reset(); showLogin(); document.getElementById('loginMessage').textContent = result.message; document.getElementById('loginMessage').classList.add('success'); }); });
+    document.getElementById('loginFormElement').addEventListener('submit', event => { event.preventDefault(); const form = event.currentTarget; submitAuth(form,'login','loginMessage',{username:form.loginUsername.value.trim(),password:form.loginPassword.value}, result => { localStorage.setItem(sessionKey,result.sessionId); form.reset(); setTimeout(() => { window.location.href='index.html#contact'; },500); }); });
+  </script>
 </body>
 </html>

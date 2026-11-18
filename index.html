@@ -1,767 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tilen Kungu - IT Professional</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            color-scheme: light;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-            color: #334155;
-        }
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #6366f1;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4f46e5;
-        }
-        @keyframes blob {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(30px, -50px) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-        }
-        .animate-blob {
-            animation: blob 7s infinite cubic-bezier(0.6, 0.01, 0.3, 0.9);
-        }
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .hero-background-slideshow {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            z-index: -1;
-        }
-        .hero-background-slideshow img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            transform: scale(1.05);
-        }
-        .hero-background-slideshow img.active {
-            opacity: 1;
-        }
-        .glass-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        header nav a,
-        header nav button,
-        #mobile-menu nav a,
-        #mobile-menu nav button {
-            font-size: 1.05rem;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Tilen Kungu provides practical IT services including web development, networking, CCTV systems, application development, design, video editing, and hardware support.">
+  <meta property="og:title" content="Tilen Kungu — Practical technology that works">
+  <meta property="og:description" content="Reliable web, networking, security, creative, and hardware solutions for people and growing businesses.">
+  <meta property="og:image" content="TIKTECH.jpeg">
+  <title>Tilen Kungu — Practical technology that works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="antialiased">
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell nav-shell">
+      <a class="wordmark" href="#top" aria-label="Tilen Kungu home"><span class="wordmark-mark">TK</span><span>Tilen Kungu</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span><b class="sr-only">Open navigation</b></button>
+      <nav id="site-menu" class="site-menu" aria-label="Primary navigation">
+        <a href="#about">About</a><a href="#capabilities">Capabilities</a><a href="#services">Services</a><a href="#portfolio">Work</a><a href="#contact">Contact</a>
+        <a id="loginNavLink" class="nav-login" href="login_register.html">Login</a>
+        <button id="logoutButton" class="nav-login is-hidden" type="button">Logout</button>
+        <a class="nav-cta" href="#contact">Start a project <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Header & Navigation -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm py-4 px-6 md:px-12 sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center flex-wrap">
-            <a href="#hero" class="text-2xl font-extrabold text-indigo-700 rounded-md p-2 hover:bg-indigo-50 transition duration-300">Tilen Kungu</a>
-            <nav class="hidden md:flex items-center space-x-2">
-                <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">About</a>
-                <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Skills</a>
-                <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Services</a>
-                <a href="#portfolio" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Portfolio</a>
-                <a id="loginNavLink" href="login_register.html" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Login</a>
-                <button id="logoutButton" class="hidden text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Logout</button>
-                <a href="#contact" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-full hover:bg-indigo-700 transition duration-300 shadow-md">Contact</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
+  <main id="main-content">
+    <section id="top" class="hero section-dark">
+      <div class="hero-media" aria-hidden="true"><img class="hero-image is-active" src="web.jpeg" alt=""><img class="hero-image" src="netwoking.jpeg" alt=""><img class="hero-image" src="app%20dev.jpeg" alt=""><img class="hero-image" src="hardware%201.jpeg" alt=""></div>
+      <div class="hero-overlay"></div>
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow light"><span class="status-dot"></span> Available for projects and support</p>
+          <p class="kicker">Independent IT specialist / Kenya</p>
+          <h1>Technology that earns its place in your business.</h1>
+          <p class="hero-lede">I build, connect, secure, and repair the systems people rely on — from a clear website to a dependable network.</p>
+          <div class="hero-actions"><a class="button button-yellow" href="#portfolio">See selected work <span aria-hidden="true">↗</span></a><a class="text-link light" href="#contact">Tell me what needs to work better <span aria-hidden="true">→</span></a></div>
+          <div class="proof-strip"><div><strong>10+</strong><span>service areas</span></div><div><strong>100%</strong><span>practical focus</span></div><div><strong>24/7</strong><span>support mindset</span></div></div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 transition-all duration-300 ease-in-out">
-            <nav class="flex flex-col items-center space-y-2">
-                <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">About</a>
-                <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Skills</a>
-                <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Services</a>
-                <a href="#portfolio" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Portfolio</a>
-                <a id="mobileLoginNavLink" href="login_register.html" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Login</a>
-                <button id="mobileLogoutButton" class="hidden text-gray-700 hover:text-indigo-600 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100 w-full text-center">Logout</button>
-                <a href="#contact" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-full hover:bg-indigo-700 transition duration-300 w-max">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <section id="hero" class="relative min-h-screen flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden text-white">
-        <div class="hero-background-slideshow">
-            <img src="web.jpeg" alt="Web development project" class="active">
-            <img src="netwoking.jpeg" alt="Networking setup">
-            <img src="app dev.jpeg" alt="Application development work">
-            <img src="hardware 1.jpeg" alt="Hardware support work">
-        </div>
-        <div class="absolute inset-0 bg-slate-950/70"></div>
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-0 left-0 w-64 h-64 bg-indigo-500 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-            <div class="absolute top-0 right-0 w-72 h-72 bg-blue-400 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-            <div class="absolute bottom-0 left-1/4 w-80 h-80 bg-purple-500 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-        </div>
-        <div class="relative z-10 container mx-auto max-w-6xl">
-            <div class="max-w-4xl mx-auto md:mx-0 text-center md:text-left">
-                <span class="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium backdrop-blur animate-fade-in-up">Available for projects, support, and consultations</span>
-                <img src="TIKTECH.jpeg" alt="Tilen Kungu Photo" class="w-32 h-32 rounded-full mx-auto md:mx-0 mb-6 mt-6 object-cover border-4 border-white shadow-lg transform transition-transform hover:scale-105">
-                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up delay-200">
-                    I build reliable <span class="text-yellow-300">tech solutions</span> that work.
-                </h1>
-                <p class="text-lg md:text-2xl mb-6 font-light animate-fade-in-up delay-300">
-                    I’m Tilen Kungu, an IT expert and professional focused on networking, web development, CCTV systems, application development, graphics, video editing, and hardware repairs.
-                </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-4 animate-fade-in-up delay-400">
-                    <a href="#portfolio" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:-translate-y-1">
-                        See my work
-                    </a>
-                    <a href="#contact" class="border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-indigo-700 transition duration-300 transform hover:-translate-y-1">
-                        Let’s connect
-                    </a>
-                </div>
-                <div class="mt-10 grid gap-4 sm:grid-cols-3 animate-fade-in-up delay-400">
-                    <div class="glass-card rounded-2xl p-4 text-left">
-                        <p class="text-2xl font-bold">10+</p>
-                        <p class="text-sm text-slate-100">service areas covered</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-4 text-left">
-                        <p class="text-2xl font-bold">100%</p>
-                        <p class="text-sm text-slate-100">focus on practical results</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-4 text-left">
-                        <p class="text-2xl font-bold">24/7</p>
-                        <p class="text-sm text-slate-100">support mindset</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="hero-profile"><div class="profile-frame"><img src="TIKTECH.jpeg" alt="Tilen Kungu working with technology"><span class="frame-label">Hands-on / outcome-led</span></div><p>Good technology should feel clear, useful, and dependable.</p></div>
+      </div>
+      <div class="scroll-note" aria-hidden="true">Scroll to explore <span></span></div>
     </section>
 
-    <section id="about" class="py-16 px-6 md:px-12 bg-white">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-center">
-                <div>
-                    <h2 class="text-4xl font-bold text-indigo-700 mb-6">About Me</h2>
-                    <p class="text-lg leading-relaxed mb-5 text-gray-700">
-                        I’m a passionate IT expert/specialist and professional who enjoys turning complex requirements into practical, reliable solutions. My work blends technical skill with creativity, so I can support both business goals and user experience.
-                    </p>
-                    <p class="text-lg leading-relaxed text-gray-700">
-                        From building responsive websites and connecting networks to setting up CCTV systems and repairing hardware, I focus on dependable results and clear communication. Every project is approached with attention to detail and a strong commitment to learning.
-                    </p>
-                </div>
-                <div class="rounded-3xl bg-gradient-to-br from-indigo-600 to-blue-600 p-8 text-white shadow-xl">
-                    <h3 class="text-2xl font-semibold mb-4">What I bring to every project</h3>
-                    <ul class="space-y-3 text-sm md:text-base">
-                        <li>• Clear planning and dependable execution</li>
-                        <li>• Strong problem solving across software and hardware</li>
-                        <li>• Clean, modern presentation with practical functionality</li>
-                        <li>• Friendly support from first idea to final delivery</li>
-                    </ul>
-                    <a href="#contact" class="inline-block mt-6 rounded-full bg-white px-5 py-3 font-semibold text-indigo-700 transition hover:bg-slate-100">Let’s discuss your idea</a>
-                </div>
-            </div>
-        </div>
+    <section id="about" class="section section-paper">
+      <div class="shell editorial-grid"><div class="section-rail"><p class="eyebrow">01 / About</p><h2>A practical partner for the work behind the screen.</h2></div><div class="section-body"><p class="lead">I’m Tilen Kungu, an IT expert who turns complex requirements into reliable, usable solutions for people and growing businesses.</p><div class="about-columns"><div><p>My work blends technical skill with creativity. I can support the visible layer — websites, applications, identity, and video — as well as the infrastructure that keeps everything moving.</p><p>Every project starts with clear communication, realistic decisions, and attention to the details that make technology feel dependable.</p></div><div class="quote-card"><span class="quote-mark">“</span><p>Make the complicated useful. Make the useful dependable.</p><span class="quote-caption">Working principle</span></div></div><a class="text-link dark" href="#contact">Let’s discuss your idea <span aria-hidden="true">↗</span></a></div></div>
     </section>
 
-    <!-- Skills/Expertise Section -->
-    <section id="skills" class="py-16 px-6 md:px-12 bg-gray-50">
-        <div class="container mx-auto max-w-5xl text-center">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-8">My Expertise</h2>
-            <p class="text-lg leading-relaxed mb-10 text-gray-700">
-                A comprehensive overview of my technical proficiencies across various IT domains.
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Skill Card: Networking -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Networking</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>Network Design & Implementation</li>
-                        <li>TCP/IP, Routing, Switching</li>
-                        <li>Network Security</li>
-                        <li>Troubleshooting</li>
-                    </ul>
-                </div>
-                <!-- Skill Card: Web Development -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Web Development</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>HTML, CSS, JavaScript</li>
-                        <li>Frontend Frameworks (e.g., React, Vue)</li>
-                        <li>Backend (e.g., Node.js, Python/Flask)</li>
-                        <li>Database Integration</li>
-                    </ul>
-                </div>
-                <!-- Skill Card: CCTV Installation -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">CCTV Installation</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>System Design & Setup</li>
-                        <li>Camera Placement & Wiring</li>
-                        <li>DVR/NVR Configuration</li>
-                        <li>Remote Monitoring Setup</li>
-                    </ul>
-                </div>
-                <!-- Skill Card: Application Development -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Application Development</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>Mobile App Development (e.g., Android)</li>
-                        <li>Desktop Application Development</li>
-                        <li>UI/UX Design Principles</li>
-                        <li>Debugging & Optimization</li>
-                    </ul>
-                </div>
-                <!-- Skill Card: Graphics Design -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8H4a2 2 0 01-2-2V6a2 2 0 012-2h2m10 10v2a2 2 0 01-2 2H8a2 2 0 01-2-2v-2m10-10V2m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8h.01M12 12h.01"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Graphics Design</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>Adobe Photoshop, Illustrator</li>
-                        <li>Branding & Logo Design</li>
-                        <li>UI/UX for Web & Mobile</li>
-                        <li>Marketing Collateral</li>
-                    </ul>
-                </div>
-                <!-- Skill Card: Video Editing -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Video Editing</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>Adobe Premiere Pro, After Effects</li>
-                        <li>Motion Graphics</li>
-                        <li>Color Grading</li>
-                        <li>Sound Design Basics</li>
-                    </ul>
-                </div>
-                <!-- NEW Skill Card: Hardware Repair & Maintenance -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-500 mb-4">
-                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 10-4 0v1a1 1 0 001 1h3a1 1 0 001-1V4zM16 16h2m-2 0h-2m2 0v2m0-2v-2m-2 2h2m-2 0h-2m2 0v2m0-2v-2M4 12h.01M16 12h.01M12 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Hardware Repair & Maintenance</h3>
-                    <ul class="text-gray-700 list-disc list-inside text-left mx-auto max-w-xs">
-                        <li>Component Diagnosis & Replacement</li>
-                        <li>System Assembly & Upgrades</li>
-                        <li>Preventive Maintenance</li>
-                        <li>Troubleshooting Hardware Issues</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <section id="capabilities" class="section section-soft">
+      <div class="shell editorial-grid"><div class="section-rail"><p class="eyebrow">02 / Capabilities</p><h2>One partner across the systems that matter.</h2></div><div class="section-body"><p class="lead">From first sketch to final fix, I bring software, hardware, infrastructure, and creative problem-solving into one practical conversation.</p><div class="capability-list">
+        <article class="capability-item"><span class="item-number">01</span><div><h3>Web development</h3><p>Responsive sites and web apps that are clear, fast, and ready for real users.</p></div><span class="item-arrow">↗</span></article>
+        <article class="capability-item"><span class="item-number">02</span><div><h3>Networks & security</h3><p>Network design, troubleshooting, VPN access, and practical security improvements.</p></div><span class="item-arrow">↗</span></article>
+        <article class="capability-item"><span class="item-number">03</span><div><h3>CCTV systems</h3><p>Planning, installation, configuration, remote monitoring, and support.</p></div><span class="item-arrow">↗</span></article>
+        <article class="capability-item"><span class="item-number">04</span><div><h3>Applications & creative</h3><p>Mobile apps, brand visuals, video editing, and interfaces built with intent.</p></div><span class="item-arrow">↗</span></article>
+        <article class="capability-item"><span class="item-number">05</span><div><h3>Hardware support</h3><p>Diagnosis, repairs, upgrades, builds, and maintenance that keep work moving.</p></div><span class="item-arrow">↗</span></article>
+      </div></div></div>
     </section>
 
-    <section id="services" class="py-16 px-6 md:px-12 bg-slate-50">
-        <div class="container mx-auto max-w-6xl text-center">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-4">Services I Offer</h2>
-            <p class="text-lg text-gray-700 mb-10">Practical solutions for homes, businesses, and growing digital needs.</p>
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Web Development</h3>
-                    <p class="text-gray-700">Modern, responsive websites and web apps built to look great and perform well.</p>
-                </div>
-                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Networking & Security</h3>
-                    <p class="text-gray-700">Reliable network setup, support, and simple security improvements for everyday use.</p>
-                </div>
-                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">CCTV Systems</h3>
-                    <p class="text-gray-700">Camera planning, installation, configuration, and monitoring support.</p>
-                </div>
-                <div class="rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition duration-300">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Hardware Support</h3>
-                    <p class="text-gray-700">PC repairs, upgrades, maintenance, and troubleshooting for smooth performance.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="services" class="section section-dark services-section"><div class="shell"><div class="section-heading-row"><div><p class="eyebrow light">03 / Services</p><h2>Built around the outcome, not the buzzword.</h2></div><p class="section-intro light-muted">Need a website, a stronger network, a safer property, or a machine that simply works again? Start with the problem.</p></div><div class="service-grid"><article class="service-panel"><span>01</span><h3>Web & digital</h3><p>Modern websites, landing pages, and practical web apps designed to earn trust and action.</p><a href="#contact">Start a web project <span>↗</span></a></article><article class="service-panel accent"><span>02</span><h3>Infrastructure</h3><p>Networks, CCTV, device setup, and support for homes, offices, and growing businesses.</p><a href="#contact">Improve your setup <span>↗</span></a></article><article class="service-panel"><span>03</span><h3>Creative systems</h3><p>Brand identities, graphics, video editing, and application ideas made easier to use.</p><a href="#contact">Make it clearer <span>↗</span></a></article></div></div></section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 px-6 md:px-12 bg-white">
-        <div class="container mx-auto max-w-5xl text-center">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-8">My Portfolio</h2>
-            <p class="text-lg leading-relaxed mb-10 text-gray-700">
-                A selection of projects demonstrating my skills and passion for technology.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1: Web Development -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="web.jpeg" alt="Web Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">E-commerce Platform</h3>
-                        <p class="text-gray-700 mb-4">
-                            Developed a responsive e-commerce website using React.js for the frontend and Node.js with MongoDB for the backend. Features user authentication, product catalog, shopping cart, and order processing.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">React.js</span>
-                            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Node.js</span>
-                            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">MongoDB</span>
-                            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Tailwind CSS</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-                <!-- Project Card 2: Networking/Security -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="netwoking.jpeg" alt="Network Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Secure Home Network Setup</h3>
-                        <p class="text-gray-700 mb-4">
-                            Designed and implemented a secure home network with VLAN segmentation, firewall rules, and VPN access for remote management. Integrated with smart home devices.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Cisco Packet Tracer</span>
-                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Firewall</span>
-                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">VPN</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-                <!-- Project Card 3: Application Development -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="app dev.jpeg" alt="App Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Mobile Task Manager App</h3>
-                        <p class="text-gray-700 mb-4">
-                            Built a cross-platform mobile application for task management using Flutter. Features include task creation, categorization, due dates, and notifications.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Flutter</span>
-                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Dart</span>
-                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Firebase</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-                <!-- Project Card 4: Graphics Design -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="graphics.jpeg" alt="Graphics Design Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Brand Identity Design</h3>
-                        <p class="text-gray-700 mb-4">
-                            Developed a complete brand identity package for a local startup, including logo design, color palette, typography, and brand guidelines.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Adobe Illustrator</span>
-                            <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Adobe Photoshop</span>
-                            <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Branding</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-                <!-- Project Card 5: Video Editing -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="video edit.jpeg" alt="Video Editing Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Promotional Video Production</h3>
-                        <p class="text-gray-700 mb-4">
-                            Edited a dynamic promotional video for a small business, incorporating motion graphics, sound design, and color correction to enhance engagement.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Adobe Premiere Pro</span>
-                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">After Effects</span>
-                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Motion Graphics</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-                <!-- Project Card 6: CCTV -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="CCTV.jpeg" alt="CCTV Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Advanced Surveillance System</h3>
-                        <p class="text-gray-700 mb-4">
-                            Installed and configured an advanced CCTV surveillance system for a commercial property, including remote access and motion detection alerts.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">IP Cameras</span>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">NVR Setup</span>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Remote Access</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-                <!-- NEW Project Card 7: Hardware Repair & Maintenance -->
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="hardware 1.jpeg" alt="Hardware Repair Project" class="w-full h-48 object-cover">
-                    <div class="p-6 text-left">
-                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">PC Build & Troubleshooting Service</h3>
-                        <p class="text-gray-700 mb-4">
-                            Provided comprehensive PC building, upgrade, and troubleshooting services for various clients, resolving hardware conflicts and optimizing performance.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Component Diagnosis</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">PC Assembly</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Troubleshooting</span>
-                        </div>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="portfolio" class="section section-paper"><div class="shell"><div class="section-heading-row"><div><p class="eyebrow">04 / Selected work</p><h2>Work that moves from idea to useful.</h2></div><p class="section-intro">A snapshot of the spaces where technical thinking and creative execution meet.</p></div><div class="portfolio-grid">
+      <article class="project-card project-feature"><div class="project-image"><img src="web.jpeg" alt="Website project interface"><span class="project-type">Digital / 01</span></div><div class="project-copy"><h3>E-commerce platform</h3><p>Responsive storefront experience with product discovery, authentication, and order flows.</p><div class="tag-list"><span>React</span><span>Node.js</span><span>MongoDB</span></div><a class="text-link dark" href="#contact">Discuss a similar project <span>↗</span></a></div></article>
+      <article class="project-card"><div class="project-image"><img src="netwoking.jpeg" alt="Network setup project"><span class="project-type">Infrastructure / 02</span></div><div class="project-copy"><h3>Secure home network</h3><p>VLAN segmentation, firewall rules, VPN access, and smart-device integration.</p><div class="tag-list"><span>Firewall</span><span>VPN</span></div></div></article>
+      <article class="project-card"><div class="project-image"><img src="app%20dev.jpeg" alt="Application development project"><span class="project-type">Product / 03</span></div><div class="project-copy"><h3>Mobile task manager</h3><p>A focused cross-platform app for tasks, reminders, and everyday momentum.</p><div class="tag-list"><span>Flutter</span><span>Firebase</span></div></div></article>
+      <article class="project-card"><div class="project-image"><img src="graphics.jpeg" alt="Brand identity design project"><span class="project-type">Creative / 04</span></div><div class="project-copy"><h3>Brand identity design</h3><p>Visual identity, color, typography, and practical marketing collateral for a startup.</p><div class="tag-list"><span>Branding</span><span>Illustrator</span></div></div></article>
+      <article class="project-card"><div class="project-image"><img src="video%20edit.jpeg" alt="Promotional video project"><span class="project-type">Motion / 05</span></div><div class="project-copy"><h3>Promotional video</h3><p>Editing, motion graphics, sound design, and color correction for a small business.</p><div class="tag-list"><span>Premiere</span><span>Motion</span></div></div></article>
+      <article class="project-card"><div class="project-image"><img src="CCTV.jpeg" alt="CCTV installation project"><span class="project-type">Security / 06</span></div><div class="project-copy"><h3>Advanced surveillance system</h3><p>Commercial CCTV installation with remote access and motion detection alerts.</p><div class="tag-list"><span>IP cameras</span><span>NVR setup</span></div></div></article>
+    </div></div></section>
 
-    <!-- Testimonials Section (Optional, can be removed if not needed) -->
-    <section id="testimonials" class="py-16 px-6 md:px-12 bg-gray-50">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-8">What People Say</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                    <p class="text-lg italic text-gray-700 mb-4">
-                        "Tilen Kungu delivered an exceptional web solution for our startup. Their attention to detail and ability to understand our needs was truly impressive. Highly recommended!"
-                    </p>
-                    <p class="font-semibold text-indigo-600">- Client A, Tech Startup</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                    <p class="text-lg italic text-gray-700 mb-4">
-                        "The network infrastructure designed by Tilen Kungu significantly improved our office efficiency and security. Their expertise in networking is top-notch."
-                    </p>
-                    <p class="font-semibold text-indigo-600">- Colleague B, IT Department</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="testimonials" class="section section-yellow"><div class="shell testimonial-grid"><div><p class="eyebrow">05 / Trust</p><h2>Clear work. Calm support. Better outcomes.</h2></div><div class="testimonial-stack"><blockquote>“Tilen delivered an exceptional web solution for our startup. Their attention to detail and ability to understand our needs was truly impressive.”<cite>— Client A, Tech startup</cite></blockquote><blockquote>“The network infrastructure significantly improved our office efficiency and security. Their expertise is top-notch.”<cite>— Colleague B, IT department</cite></blockquote></div></div></section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 px-6 md:px-12 bg-white">
-        <div class="container mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-8">Get in Touch</h2>
-            <p class="text-lg leading-relaxed mb-10 text-gray-700">
-                Have a project in mind or just want to chat? Feel free to reach out!
-            </p>
-            <div id="authMessage" class="text-sm text-gray-700 mb-4"></div>
-            <div id="formMessage" class="hidden rounded-md border px-4 py-3 text-sm text-center"></div>
-            <form id="contactForm" class="space-y-6 bg-gray-50 p-8 rounded-lg shadow-lg">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 text-left">Your Name</label>
-                    <input type="text" id="name" name="name" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-gray-900">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 text-left">Your Email</label>
-                    <input type="email" id="email" name="email" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-gray-900">
-                </div>
-                <div>
-                    <label for="subject" class="block text-sm font-medium text-gray-700 text-left">Subject</label>
-                    <input type="text" id="subject" name="subject" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-gray-900">
-                </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700 text-left">Message</label>
-                    <textarea id="message" name="message" rows="5" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-gray-900"></textarea>
-                </div>
-                <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105">
-                    Send Message
-                </button>
-            </form>
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600 mb-3">Prefer WhatsApp? Send me a message directly with one click.</p>
-                <a href="https://wa.me/254794347403?text=Hello%20Tilen%2C%20I%20would%20like%20to%20chat%20about%20your%20IT%20services.%20Please%20let%20me%20know%20how%20to%20get%20started." target="_blank" rel="noopener"
-                    class="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-5 rounded-full shadow-md transition duration-300">
-                    <span>Chat on WhatsApp</span>
-                </a>
-            </div>
-            <p class="mt-4 text-sm text-gray-600">
-                Messages are stored securely in PostgreSQL.
-            </p>
-        </div>
-    </section>
+    <section id="contact" class="section contact-section section-paper"><div class="shell contact-grid"><div class="contact-copy"><p class="eyebrow">06 / Contact</p><h2>Tell me what needs to work better.</h2><p class="lead">Have a project in mind, a setup that needs attention, or a problem you have been putting off? Send a note and let’s make the next step clear.</p><div class="contact-notes"><p><span>01</span> Clear, practical recommendations</p><p><span>02</span> Friendly support from first idea to final delivery</p><p><span>03</span> WhatsApp available for a quick conversation</p></div><a class="whatsapp-link" href="https://wa.me/254794347403?text=Hello%20Tilen%2C%20I%20would%20like%20to%20chat%20about%20your%20IT%20services." target="_blank" rel="noopener">Chat on WhatsApp <span>↗</span></a></div><div class="contact-form-wrap"><div id="authMessage" class="form-status" role="status"></div><div id="formMessage" class="form-status is-hidden" role="alert"></div><form id="contactForm" class="contact-form"><div class="form-row"><label for="name">Your name<input type="text" id="name" name="name" autocomplete="name" required></label><label for="email">Email address<input type="email" id="email" name="email" autocomplete="email" required></label></div><label for="subject">What can I help with?<input type="text" id="subject" name="subject" required></label><label for="message">A few details<textarea id="message" name="message" rows="6" required></textarea></label><button class="button button-dark full-width" type="submit">Send message <span aria-hidden="true">↗</span></button><p class="form-footnote">Please log in before sending a message. Your details are handled through the site’s secure backend.</p></form></div></div></section>
+  </main>
 
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 text-white py-8 px-6 md:px-12 rounded-t-lg">
-        <div class="container mx-auto text-center">
-            <p class="mb-4">&copy; 2025 Tilen Kungu. All rights reserved.</p>
-            <div class="flex justify-center flex-wrap gap-4">
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/tilenvennykungu" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: #1877F2;" aria-label="Facebook">
-                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill="#fff" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z" />
-                    </svg>
-                </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/tilenvennykungu" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 30%, #d6249f 60%, #285AEB 100%);" aria-label="Instagram">
-                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill="#fff" d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
-                    </svg>
-                </a>
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@tilenvennykungu" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: #000;" aria-label="TikTok">
-                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill="#fff" d="M12.5 2.5h2.5v7.5c1.103 0 2 .897 2 2s-.897 2-2 2c-.66 0-1.243-.336-1.588-.838a2.99 2.99 0 00-2.164-.662V22a7 7 0 017-7V3.5h2.5v6.5c0 4.142-3.358 7.5-7.5 7.5S5.5 14.142 5.5 10 8.858 2.5 13 2.5V2.5z" />
-                    </svg>
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.me/44794347403" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:-translate-y-1 hover:shadow-2xl" style="background: #25D366;" aria-label="WhatsApp">
-                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill="#fff" d="M16.11 14.89c-.19.53-1.1 1.01-1.58 1.06-.46.05-.97.07-1.8-.26-1.96-.44-3.22-1.73-3.66-3.03-.32-.9-.03-1.32.82-2.22.25-.28.53-.43.86-.43.29 0 .53.04.76.12.29.09.48.15.72.15.31 0 .5-.04.76-.04.24 0 .5-.04.77-.12.34-.11.74-.31 1.08-.49.25-.13.47-.23.71-.23.26 0 .51.1.77.3.47.33.8.94.88 1.27.08.33.08.78 0 1.13-.09.35-.36.62-.63.91-.19.2-.36.38-.55.57-.06.05-.21.18-.29.25-.09.08-.19.19-.06.38.13.19.57.99.61 1.08.04.09.61.93 1.58 1.55.22.14.39.23.57.23.21 0 .55-.08.84-.2.29-.12.74-.35.84-.7.11-.37.11-.81.08-.88-.03-.08-.11-.12-.23-.18z" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-                // Close mobile menu after clicking a link
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        const apiBase = 'http://localhost:3000';
-        const contactForm = document.getElementById('contactForm');
-        const formMessage = document.getElementById('formMessage');
-
-        if (contactForm) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                formMessage.className = 'rounded-md border px-4 py-3 text-sm hidden';
-                formMessage.textContent = '';
-
-                const sessionId = localStorage.getItem('mywebpageSessionId');
-                if (!sessionId) {
-                    formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
-                    formMessage.textContent = 'You must be logged in to send a message. Please login first.';
-                    return;
-                }
-
-                const formData = {
-                    name: contactForm.name.value.trim(),
-                    email: contactForm.email.value.trim(),
-                    subject: contactForm.subject.value.trim(),
-                    message: contactForm.message.value.trim(),
-                };
-
-                if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-                    formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
-                    formMessage.textContent = 'Please complete all fields before submitting.';
-                    return;
-                }
-
-                const submitButton = contactForm.querySelector('button[type="submit"]');
-                if (submitButton) {
-                    submitButton.disabled = true;
-                    submitButton.textContent = 'Sending...';
-                }
-
-                try {
-                    const response = await fetch(`${apiBase}/api/contact`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-session-id': sessionId,
-                        },
-                        body: JSON.stringify(formData),
-                    });
-                    const result = await response.json();
-
-                    if (result.success) {
-                        formMessage.className = 'rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700';
-                        formMessage.textContent = result.message;
-                        contactForm.reset();
-                    } else {
-                        formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
-                        formMessage.textContent = result.message || 'Unable to send your message. Please try again later.';
-                    }
-                } catch (error) {
-                    formMessage.className = 'rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
-                    formMessage.textContent = 'Unable to send your message right now. Please try again later.';
-                } finally {
-                    if (submitButton) {
-                        submitButton.disabled = false;
-                        submitButton.textContent = 'Send Message';
-                    }
-                }
-            });
-        }
-
-        // --- Auth helpers ---
-        const sessionKey = 'mywebpageSessionId';
-        const loginNavLink = document.getElementById('loginNavLink');
-        const logoutButton = document.getElementById('logoutButton');
-        const mobileLoginNavLink = document.getElementById('mobileLoginNavLink');
-        const mobileLogoutButton = document.getElementById('mobileLogoutButton');
-        const authMessage = document.getElementById('authMessage');
-
-        function getSessionId() {
-            return localStorage.getItem(sessionKey);
-        }
-
-        function setSessionId(id) {
-            if (id) {
-                localStorage.setItem(sessionKey, id);
-            } else {
-                localStorage.removeItem(sessionKey);
-            }
-        }
-
-        async function checkAuth() {
-            const sessionId = getSessionId();
-            if (!sessionId) {
-                updateAuthUI(false);
-                return false;
-            }
-
-            try {
-                const response = await fetch(`${apiBase}/api/session?sessionId=${sessionId}`);
-                const data = await response.json();
-                updateAuthUI(data.authenticated);
-                return data.authenticated;
-            } catch (error) {
-                updateAuthUI(false);
-                return false;
-            }
-        }
-
-        function updateAuthUI(isAuthenticated) {
-            if (loginNavLink) loginNavLink.classList.toggle('hidden', isAuthenticated);
-            if (logoutButton) logoutButton.classList.toggle('hidden', !isAuthenticated);
-            if (mobileLoginNavLink) mobileLoginNavLink.classList.toggle('hidden', isAuthenticated);
-            if (mobileLogoutButton) mobileLogoutButton.classList.toggle('hidden', !isAuthenticated);
-
-            if (authMessage) {
-                authMessage.textContent = isAuthenticated
-                    ? 'You are logged in. You can send a message below.'
-                    : 'Please log in to send a message.';
-                authMessage.className = isAuthenticated ? 'text-sm text-green-700 mb-4' : 'text-sm text-red-700 mb-4';
-            }
-        }
-
-        async function logout() {
-            const sessionId = getSessionId();
-            if (sessionId) {
-                await fetch(`${apiBase}/api/logout`, {
-                    method: 'POST',
-                    headers: {
-                        'x-session-id': sessionId,
-                    },
-                });
-            }
-            setSessionId(null);
-            updateAuthUI(false);
-            window.location.href = 'login_register.html';
-        }
-
-        if (logoutButton) {
-            logoutButton.addEventListener('click', logout);
-        }
-        if (mobileLogoutButton) {
-            mobileLogoutButton.addEventListener('click', logout);
-        }
-
-        checkAuth();
-
-        // --- Background Image Slideshow Logic ---
-        const backgroundImages = document.querySelectorAll('.hero-background-slideshow img');
-        let currentImageIndex = 0;
-
-        function changeBackgroundImage() {
-            // Remove 'active' class from current image
-            backgroundImages[currentImageIndex].classList.remove('active');
-
-            // Move to the next image, loop back to start if at the end
-            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-
-            // Add 'active' class to the new current image
-            backgroundImages[currentImageIndex].classList.add('active');
-        }
-
-        // Change image every 3 seconds (3000 milliseconds)
-        setInterval(changeBackgroundImage, 3000);
-
-        // Set the first image to active on load
-        if (backgroundImages.length > 0) {
-            backgroundImages[0].classList.add('active');
-        }
-    </script>
+  <footer class="site-footer"><div class="shell footer-grid"><div><a class="wordmark light-wordmark" href="#top"><span class="wordmark-mark">TK</span><span>Tilen Kungu</span></a><p>Practical technology for people and growing businesses.</p></div><div class="footer-links"><a href="#about">About</a><a href="#services">Services</a><a href="#portfolio">Work</a><a href="login_register.html">Login</a></div><div class="social-links"><a href="https://www.facebook.com/tilenvennykungu" target="_blank" rel="noopener" aria-label="Facebook">Fb</a><a href="https://www.instagram.com/tilenvennykungu" target="_blank" rel="noopener" aria-label="Instagram">Ig</a><a href="https://www.tiktok.com/@tilenvennykungu" target="_blank" rel="noopener" aria-label="TikTok">Tk</a></div></div><div class="shell footer-bottom"><span>© 2025 Tilen Kungu. All rights reserved.</span><span>Web / networks / creative / support</span></div></footer>
+  <script src="app.js" defer></script>
 </body>
 </html>
