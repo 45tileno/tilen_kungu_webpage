@@ -12,6 +12,10 @@
 - [x] Add reduced-motion handling, visible focus states, and responsive layouts.
 - [x] Add `public/manus-routes.json` for the managed preview workflow.
 - [x] Add resume-backed positioning, the Testing & Operations capability, and the LottoOps inventory-platform case study using only details supplied in the uploaded resume.
+- [x] Add crawler-visible SEO metadata to the homepage: canonical URL, title, description, keywords, Open Graph, Twitter Card, and Person JSON-LD.
+- [x] Add `sitemap.xml` for the public homepage and `robots.txt` exclusions for APIs and authentication.
+- [x] Mark the authentication page `noindex, nofollow`.
+- [x] Create the reusable `portfolio-refresh-seo` skill for resume-backed portfolio refreshes and SEO validation.
 
 ## Acceptance criteria
 

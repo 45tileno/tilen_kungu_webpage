@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /login_register.html
+
+Sitemap: https://kungutech.vercel.app/sitemap.xml
